@@ -36,12 +36,7 @@ Learn more about the model [here](https://developer.nvidia.com/blog/build-enterp
 
 ## Installation
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/NVIDIA/GenerativeAIExamples.git
-   cd GenerativeAIExamples/community/data-analysis-agent
-   ```
-
+1. Clone this repository
 2. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -63,12 +58,7 @@ Learn more about the model [here](https://developer.nvidia.com/blog/build-enterp
    streamlit run data_analysis.py
    ```
 
-2. Download example dataset (optional):
-   ```bash
-   wget https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv
-   ```
-
-3. Use the application:
+2. Use the application:
    - Upload a CSV file (e.g., the Titanic dataset)
    - Ask questions in natural language
    - View results, visualizations, and detailed reasoning
