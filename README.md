@@ -1,74 +1,73 @@
-# Data Analysis Agent
 
-An interactive, agentic data analysis application that leverages advanced LLM reasoning to help users explore, visualize, and understand their data using NVIDIA Llama-3.1-Nemotron-Ultra-253B-v1.
+# Data Analyst AI Agent
 
-## Overview
-
-This repository contains a Streamlit application that demonstrates a complete workflow for data analysis:
-1. **Data Upload**: Upload CSV files for analysis
-2. **Natural Language Queries**: Ask questions about your data in plain English
-3. **Automated Visualization**: Generate relevant plots and charts
-4. **Transparent Reasoning**: Get detailed explanations of the analysis process
-
-The implementation leverages the powerful Llama-3.1-Nemotron-Ultra-253B-v1 model through NVIDIA's API, enabling sophisticated data analysis and reasoning.
-
-Learn more about the model [here](https://developer.nvidia.com/blog/build-enterprise-ai-agents-with-advanced-open-nvidia-llama-nemotron-reasoning-models/).
+A production-ready Data Analyst AI Agent that uses LangGraph, FastAPI, and Streamlit to analyze data and generate visualizations.
 
 ## Features
 
-- **Agentic Architecture**: Modular agents for data insight, code generation, execution, and reasoning
-- **Natural Language Queries**: Ask questions about your data—no coding required
-- **Automated Visualization**: Instantly generate and display relevant plots
-- **Transparent Reasoning**: Get clear, LLM-generated explanations for every result
-- **Powered by NVIDIA Llama-3.1-Nemotron-Ultra-253B-v1**: State-of-the-art reasoning and interpretability
+- **LangGraph Workflow**: Structured agent workflow (Query Analysis -> Code Generation -> Execution -> Reasoning).
+- **FastAPI Backend**: REST API for handling data sessions and agent interactions.
+- **Streamlit Frontend**: Interactive web interface for uploading data and chatting with the agent.
+- **Code Execution**: safely executes pandas/matplotlib code.
+- **NVIDIA AI Endpoints**: Uses Llama-3.1-Nemotron for high-quality reasoning and code generation.
 
+## Project Structure
 
-## Requirements
+```
+data_analyst_ai_agent/
+├── backend/            # FastAPI application
+│   ├── app/
+│   │   ├── api/        # API endpoints
+│   │   ├── core/       # Configuration
+│   │   ├── graph/      # LangGraph nodes and workflow
+│   │   └── services/   # LLM and Session services
+│   └── main.py         # Entry point
+├── frontend/           # Streamlit application
+│   └── app.py
+├── .env.example        # Environment variables example
+└── requirements.txt    # Project dependencies
+```
 
-- Python 3.10+
-- Streamlit
-- NVIDIA API Key 
-- Required Python packages:
-  - pandas
-  - matplotlib
-  - streamlit
-  - requests
+## Setup
 
-## Installation
+1.  **Clone the repository**.
+2.  **Install dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Environment Variables**:
+    Copy `.env.example` to `.env` and add your NVIDIA API Key.
+    ```bash
+    cp .env.example .env
+    # Edit .env and set NVIDIA_API_KEY
+    ```
 
-1. Clone this repository
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Running the Application
 
-3. Set up your NVIDIA API key:
-   - Sign up or log in at [NVIDIA Build](https://build.nvidia.com/nvidia/llama-3_1-nemotron-ultra-253b-v1?integrate_nim=true&hosted_api=true&modal=integrate-nim)
-   - Generate an API key
-   - Set the API key in your environment:
-     ```bash
-     export NVIDIA_API_KEY=your_nvidia_api_key_here
-     ```
-   - Or add it to your `.env` file if you use one
+You need to run both the backend and frontend.
 
-## Usage
+### 1. Start the Backend (FastAPI)
 
-1. Run the Streamlit app:
-   ```bash
-   streamlit run data_analysis.py
-   ```
+Run this in one terminal:
+```bash
+python -m backend.app.main
+```
+Or using uvicorn directly (from root):
+```bash
+uvicorn backend.app.main:app --reload
+```
+The API will be available at `http://localhost:8000`.
 
-2. Use the application:
-   - Upload a CSV file (e.g., the Titanic dataset)
-   - Ask questions in natural language
-   - View results, visualizations, and detailed reasoning
+### 2. Start the Frontend (Streamlit)
 
+Run this in a second terminal:
+```bash
+streamlit run frontend/app.py
+```
+The frontend will open in your browser (usually `http://localhost:8501`).
 
-## Model Details
+## Workflow
 
-The Llama-3.1-Nemotron-Ultra-253B-v1 model used in this project has the following specifications:
-- **Parameters**: 253B
-- **Features**: Advanced reasoning capabilities
-- **Use Cases**: Complex data analysis, multi-agent systems
-- **Enterprise Ready**: Optimized for production deployment
-
+1.  Upload a CSV file in the Streamlit sidebar.
+2.  Ask questions about the data (e.g., "Analyze the trends", "Plot sales over time").
+3.  The agent generates code, executes it, and explains the results.
